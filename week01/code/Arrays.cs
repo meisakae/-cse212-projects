@@ -2,7 +2,7 @@ public static class Arrays
 {
     public static double[] MultiplesOf(double number, int length)
     {
-        //step 1 creat an array to hold the multiples of the store
+        //step 1 creat an array to hold the multiples.
         double[] multiples = new double[length];
         //step 2 loop from 0 to leght -1
         for (int i = 0; i < length; i++)
