@@ -7,13 +7,15 @@ public class PersonQueue
 
     public int Length => _queue.Count;
 
+    public int Turns { get; internal set; }
+
     /// <summary>
     /// Add a person to the queue
     /// </summary>
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        _queue.Add(person);
     }
 
     public Person Dequeue()

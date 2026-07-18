@@ -40,17 +40,13 @@ public class TakingTurnsQueue
         else
         {
             Person person = _people.Dequeue();
-            if (person.Turns <= 0)
+            if (person.Turns > 0)
             {
                 _people.Enqueue(person);
             }
-            else
+            else if (person.Turns > 1)
             {
-                person.Turns -= 1;
-                if (person.Turns > 0)
-                {
-                    _people.Enqueue(person);
-                }
+                _people.Enqueue(new Person(person.Name, person.Turns - 1));;
             }
             
             return person;
