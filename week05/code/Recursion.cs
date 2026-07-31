@@ -14,8 +14,11 @@ public static class Recursion
     /// </summary>
     public static int SumSquaresRecursive(int n)
     {
-        // TODO Start Problem 1
-        return 0;
+        if (n <= 0)
+        {
+            return 0;
+        }
+        return SumSquaresRecursive(n- 1) + n * n;
     }
 
     /// <summary>
@@ -39,7 +42,17 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
-        // TODO Start Problem 2
+        if (size == 0)
+        {
+            results.Add(word);
+            return;
+        }
+
+        foreach (char letter in letters)
+        {
+            string remainingLetters = letters.Remove (letters.IndexOf(letter), 1);
+            PermutationsChoose(results, remainingLetters, size - 1, word + letter);
+        }
     }
 
     /// <summary>
@@ -96,10 +109,19 @@ public static class Recursion
         if (s == 3)
             return 4;
 
-        // TODO Start Problem 3
+        if (remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
 
         // Solve using recursion
         decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        remember[s] = ways;
         return ways;
     }
 
@@ -118,7 +140,19 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        // TODO Start Problem 4
+        int index = pattern.IndexOf('*');
+
+        if(index == -1)
+        {
+            results.Add(pattern);
+            return;
+        }
+
+        string pattern0 = pattern[..index] + "0" + pattern[(index + 1)..];
+        string pattern1 = pattern[..index] + "1" + pattern[(index + 1)..];
+
+        WildcardBinary(pattern0, results);
+        WildcardBinary(pattern1, results);
     }
 
     /// <summary>
